@@ -8,8 +8,7 @@ const useScrollLock = (id: string) => {
     const desktop = document.querySelector("#layout") as HTMLElement;
     desktop.style.paddingRight = `${scrollBarCompensation}px`;
     const navbar = document.querySelector(`#${id}`) as HTMLElement;
-    if (navbar)
-      navbar.style.paddingRight = `${scrollBarCompensation}px`;
+    if (navbar) navbar.style.paddingRight = `${scrollBarCompensation}px`;
   }, []);
 
   const unlockScroll = useCallback(() => {
@@ -18,8 +17,7 @@ const useScrollLock = (id: string) => {
     const desktop = document.querySelector("#layout") as HTMLElement;
     desktop.style.paddingRight = "";
     const navbar = document.querySelector(`#${id}`) as HTMLElement;
-    if (navbar)
-      navbar.style.paddingRight = "";
+    if (navbar) navbar.style.paddingRight = "";
   }, []);
 
   useLayoutEffect(() => {

@@ -1,4 +1,4 @@
-@import "@/styles/variables.module.scss";
+@use "@/styles/variables.module.scss";;
 
 .navbar {
     position: fixed;
@@ -16,6 +16,10 @@
     overflow-y: hidden;
 
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+
+    &[data-hidden="true"] {
+        display: none;
+    }
 }
 
 .navbar_container {
@@ -40,6 +44,8 @@
         width: 100%;
         height: 100%;
         background-color: rgba(255, 255, 255, 0.5);
+
+        -webkit-backdrop-filter: blur(10px);
         backdrop-filter: blur(10px);
         z-index: -1;
     }
@@ -54,6 +60,8 @@
         width: 100%;
         height: 100%;
         background-color: rgba(0, 0, 0, 0.5);
+
+        -webkit-backdrop-filter: blur(10px);
         backdrop-filter: blur(10px);
         z-index: -1;
     }
@@ -65,7 +73,7 @@
 }
 
 .logo_title {
-    font-size: x-large;
+    font-size: $h1-font-size;
     font-weight: 700;
     margin-left: 16px;
     cursor: pointer;
@@ -101,6 +109,7 @@
 
     border-radius: 0 0 15px 15px;
 
+    -webkit-backdrop-filter: blur(8px);
     backdrop-filter: blur(8px);
 
     transform: translateX(-100%);
@@ -130,7 +139,7 @@
     align-items: center;
 
     cursor: pointer;
-    font-size: 1.8rem;
+    font-size: $h1-font-size;
     height: 50px;
     justify-content: center;
     width: 50px;
@@ -151,43 +160,43 @@
 }
 
 .link_light {
-    color: $on-primary-container-color;
+    color: $on-background-color;
 
     &:hover {
-        color: $on-primary-color;
-        background-color: $on-primary-container-color;
+        color: $on-primary-container-color;
+        background-color: $primary-container-color;
     }
 
-    border-top: 1px solid $on-primary-container-color;
+    border-top: 1px solid $on-background-color;
 
     &:nth-last-child(2) {
-        border-bottom: 1px solid $on-primary-container-color;
+        border-bottom: 1px solid $on-background-color;
     }
 }
 
 .link_dark {
-    color: $on-primary-container-color-dark;
+    color: $on-background-color-dark;
 
     &:hover {
-        color: $primary-color-dark;
+        color: $on-primary-container-color-dark;
         background-color: $primary-container-color-dark;
     }
 
-    border-top: 1px solid $on-primary-container-color-dark;
+    border-top: 1px solid $on-background-color-dark;
 
     &:nth-last-child(2) {
-        border-bottom: 1px solid $on-primary-container-color-dark;
+        border-bottom: 1px solid $on-background-color-dark;
     }
 }
 
 .active_light {
-    color: $primary-color;
-    background-color: rgba($primary-container-color, 0.8);
+    color: $on-primary-color;
+    background-color: rgba($primary-color, 0.8);
 }
 
 .active_dark {
-    color: $primary-color;
-    background-color: rgba($primary-container-color, 0.8);
+    color: $on-primary-color-dark;
+    background-color: rgba($primary-color-dark, 0.8);
 }
 
 .overlay {
@@ -203,11 +212,39 @@
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-.settingButton {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-    margin-right: 10px;
-    white-space: nowrap;
+.linkName {
+    margin-left: 5px;
+}
+
+.dropdown {
+    display: flex;
+    flex-direction: column;
+
+    .dropdown_toggle {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px;
+        background: none;
+        border: none;
+        width: 100%;
+        font-size: 1rem;
+        cursor: pointer;
+        color: inherit;
+    }
+
+    .dropdown_menu {
+        display: flex;
+        flex-direction: column;
+        padding-left: 16px; // 子項目縮排
+    }
+
+    .chevron {
+        margin-left: auto;
+        transition: transform 0.2s ease;
+    }
+
+    .chevron_open {
+        transform: rotate(180deg);
+    }
 }

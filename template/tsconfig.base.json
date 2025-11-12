@@ -9,6 +9,12 @@
         "paths": {
             "@/*": [
                 "src/*"
+            ],
+            "~/*": [
+                "public/*"
+            ],
+            "react": [
+                "./node_modules/@types/react"
             ]
         },
         "allowJs": true,
@@ -27,7 +33,8 @@
     "include": [
         "next-env.d.ts",
         "**/*.ts",
-        "**/*.tsx"
+        "**/*.tsx",
+        "next.config.ts"
     ],
     "exclude": [
         "node_modules",

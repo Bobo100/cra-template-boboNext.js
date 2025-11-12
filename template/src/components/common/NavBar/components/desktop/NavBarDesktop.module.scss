@@ -1,0 +1,169 @@
+@use "@/styles/variables.module.scss";;
+
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: $navbar-height;
+    z-index: 20;
+    transition: top 0.3s;
+
+    display: flex;
+    justify-content: center;
+    padding-left: 20px;
+    padding-right: 20px;
+
+    // overflow-y: hidden;
+
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+
+    @include rwd-custom($width-2xl) {
+        padding-left: 0;
+        padding-right: 0;
+        display: none;
+    }
+}
+
+.navbar_container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.navbar_Hidden {
+    top: -$navbar-height;
+}
+
+.nav_light {
+    color: $on-background-color;
+    background-color: $background-color;
+}
+
+.nav_dark {
+    color: $on-background-color-dark;
+    background-color: $background-color-dark;
+}
+
+.logo_container {
+    display: flex;
+    align-items: center;
+}
+
+.logo_title {
+    font-size: $h1-font-size;
+    font-weight: 700;
+    margin-left: 16px;
+    cursor: pointer;
+}
+
+.logo_title_light {
+    color: $on-background-color;
+}
+
+.logo_title_dark {
+    color: $on-background-color-dark;
+}
+
+.navbar_menu {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.link_container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.dropdown {
+    position: relative;
+    // padding: 0 12px;
+    cursor: pointer;
+
+    .dropdown_label {
+        display: inline-block;
+    }
+
+    .dropdown_menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: #222; // 可配合主題
+        min-width: 160px;
+        padding: 8px 0;
+        border-radius: 6px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+
+        a {
+            display: block;
+            padding: 8px 16px;
+            white-space: nowrap;
+            color: #fff;
+            text-decoration: none;
+
+            &:hover {
+                background: rgba(255, 255, 255, 0.1);
+            }
+        }
+    }
+}
+
+.link {
+    @include text-style(h3);
+
+    border-radius: 5px;
+    border: 1px solid transparent;
+    transition: transform 0.3s ease-in-out;
+    margin-right: 10px;
+
+    &:hover {
+        transform: scale(0.9);
+    }
+
+    @include rwd-custom($width-2xl) {
+        @include text-style(h4);
+    }
+}
+
+.link_light {
+    color: $on-background-color;
+
+    // color: $on-primary-color;
+    // background-color: $primary-color;
+
+    &:hover {
+        // color: $on-primary-container-color;
+        // border-color: $on-primary-container-color;
+        box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.3); // 輕微陰影
+        background-image: linear-gradient(rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.08)); // 疊加 state layer
+    }
+}
+
+.link_dark {
+    color: $on-background-color-dark;
+
+    &:hover {
+        color: $on-primary-container-color-dark;
+        border-color: $primary-container-color-dark;
+        box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.3); // 輕微陰影
+        background-image: linear-gradient(rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.08)); // 疊加 state layer
+    }
+}
+
+.active_light {
+    // color: $primary-color;
+    // background-color: rgba($primary-container-color, 0.8);
+}
+
+.active_dark {
+    // color: $primary-color;
+    // background-color: rgba($primary-container-color, 0.8);
+}
+
+.linkName {
+    margin-left: 5px;
+}

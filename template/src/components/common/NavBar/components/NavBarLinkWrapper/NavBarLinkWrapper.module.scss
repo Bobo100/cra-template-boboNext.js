@@ -1,0 +1,12 @@
+@use "@/styles/variables.module.scss";;
+
+.footer_icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+    background-color: white;
+
+    &:hover {
+        transform: scale(1.1);
+    }
+}
