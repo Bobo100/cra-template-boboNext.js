@@ -59,8 +59,8 @@ export default function Layout({
   }
 
   // 預設值
-  const siteName = "Kurau Blog";
-  const pageTitle = title ? `Kurau Blog ${title}` : siteName;
+  const siteName = "Blog";
+  const pageTitle = title ? `Blog ${title}` : siteName;
   const pageDesc = content ?? siteName;
   const pageImage = image ?? "/default-og.png"; // 放一張 default OG 圖在 public/
   const pageUrl = `${process.env.NEXT_PUBLIC_WEBSITE_URL}${router.asPath}`;

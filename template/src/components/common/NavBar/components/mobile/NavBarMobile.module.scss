@@ -1,4 +1,6 @@
-@use "@/styles/variables.module.scss";;
+@use "@/styles/_variables" as *;
+@use "@/styles/_mixins" as mixins;
+
 
 .navbar {
     position: fixed;

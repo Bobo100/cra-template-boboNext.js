@@ -1,0 +1,274 @@
+@use "@/styles/mixins.scss" as *;
+@use "sass:map";
+
+//---------------common-variables
+$navbar-height: 100px;
+$max-width: 1440px;
+
+$width-sm: 640px;
+$width-md: 768px;
+$width-lg: 1024px;
+$width-xl: 1280px;
+$width-2xl: 1536px;
+
+// :export {
+//     navbarHeight: $navbar-height;
+//     width2XL: $width-2xl;
+// }
+
+// -------------------------------
+// Base Font Sizes (rem)
+// -------------------------------
+$display-font-size: 3.5rem; // 56px
+$display-line-height: 4rem; // 64px
+
+$h1-font-size: 2.5rem; // 40px
+$h1-line-height: 3rem; // 48px
+
+$h2-font-size: 2rem; // 32px
+$h2-line-height: 2.5rem; // 40px
+
+$h3-font-size: 1.5rem; // 24px
+$h3-line-height: 2rem; // 32px
+
+$h4-font-size: 1.25rem; // 20px
+$h4-line-height: 1.75rem; // 28px
+
+$body-font-size: 1rem; // 16px
+$body-line-height: 1.5rem; // 24px
+
+$caption-font-size: 0.875rem; // 14px
+$caption-line-height: 1.25rem; // 20px
+
+$large-font-size: 1.125rem; // 18px
+$large-line-height: 1.625rem; // 26px
+
+$small-font-size: 0.75rem; // 12px
+$small-line-height: 1.125rem; // 18px
+
+$title-font-weight: 500;
+
+// -------------------------------
+// Typography Map (Desktop)
+// -------------------------------
+$typography: (
+    display: (
+        font-size: $display-font-size,
+        line-height: $display-line-height
+    ),
+    // 56 / 64px
+    h1: (
+            font-size: $h1-font-size,
+            line-height: $h1-line-height
+        ),
+    // 40 / 48px
+    h2: (
+            font-size: $h2-font-size,
+            line-height: $h2-line-height
+        ),
+    // 32 / 40px
+    h3: (
+            font-size: $h3-font-size,
+            line-height: $h3-line-height
+        ),
+    // 24 / 32px
+    h4: (
+            font-size: $h4-font-size,
+            line-height: $h4-line-height
+        ),
+    // 20 / 28px
+    body: (
+            font-size: $body-font-size,
+            line-height: $body-line-height
+        ),
+    // 16 / 24px
+    large: (
+            font-size: $large-font-size,
+            line-height: $large-line-height
+        ),
+    // 18 / 26px
+    small: (
+            font-size: $small-font-size,
+            line-height: $small-line-height
+        ),
+    // 12 / 18px
+    caption: (
+            font-size: $caption-font-size,
+            line-height: $caption-line-height
+        ) // 14 / 20px
+);
+
+// -------------------------------
+// Base Font Sizes (mobile, rem)
+// -------------------------------
+$display-font-size-mobile: 2.5rem; // 40px
+$display-line-height-mobile: 3rem; // 48px
+
+$h1-font-size-mobile: 2rem; // 32px
+$h1-line-height-mobile: 2.5rem; // 40px
+
+$h2-font-size-mobile: 1.75rem; // 28px
+$h2-line-height-mobile: 2.25rem; // 36px
+
+$h3-font-size-mobile: 1.5rem; // 24px
+$h3-line-height-mobile: 2rem; // 32px
+
+$h4-font-size-mobile: 1.25rem; // 20px
+$h4-line-height-mobile: 1.75rem; // 28px
+
+$body-font-size-mobile: 0.9375rem; // 15px
+$body-line-height-mobile: 1.5rem; // 24px
+
+$large-font-size-mobile: 1rem; // 16px
+$large-line-height-mobile: 1.5rem; // 24px
+
+$small-font-size-mobile: 0.875rem; // 14px
+$small-line-height-mobile: 1.25rem; // 20px
+
+$caption-font-size-mobile: 0.75rem; // 12px
+$caption-line-height-mobile: 1.125rem; // 18px
+
+// -------------------------------
+// Typography Map (Mobile)
+// -------------------------------
+$typography-mobile: (
+    display: (
+        font-size: $display-font-size-mobile,
+        line-height: $display-line-height-mobile
+    ),
+
+    // 40 / 48px
+    h1: (
+            font-size: $h1-font-size-mobile,
+            line-height: $h1-line-height-mobile
+        ),
+
+    // 32 / 40px
+    h2: (
+            font-size: $h2-font-size-mobile,
+            line-height: $h2-line-height-mobile
+        ),
+
+    // 28 / 36px
+    h3: (
+            font-size: $h3-font-size-mobile,
+            line-height: $h3-line-height-mobile
+        ),
+
+    // 24 / 32px
+    h4: (
+            font-size: $h4-font-size-mobile,
+            line-height: $h4-line-height-mobile
+        ),
+
+    // 20 / 28px
+    body: (
+            font-size: $body-font-size-mobile,
+            line-height: $body-line-height-mobile
+        ),
+
+    // 15 / 24px
+    large: (
+            font-size: $large-font-size-mobile,
+            line-height: $large-line-height-mobile
+        ),
+
+    // 16 / 24px
+    small: (
+            font-size: $small-font-size-mobile,
+            line-height: $small-line-height-mobile
+        ),
+
+    // 14 / 20px
+    caption: (
+            font-size: $caption-font-size-mobile,
+            line-height: $caption-line-height-mobile
+        ) // 12 / 18px
+);
+
+// 取單個值
+@function font-size($key) {
+    @return map.get(map.get($typography, $key), size);
+}
+
+@function line-height($key) {
+    @return map.get(map.get($typography, $key), line-height);
+}
+
+// 取 map 值
+@function type-props($map, $key) {
+    @return map.get($map, $key);
+}
+
+// 一次套用
+// -------------------------------
+// Mixin for usage
+// -------------------------------
+@mixin text-style($type, $max-width: $width-sm) {
+    $style: map.get($typography, $type);
+
+    font-size: map.get($style, font-size);
+    line-height: map.get($style, line-height);
+
+    @media (max-width: $max-width) {
+        $mobile-style: map.get($typography-mobile, $type);
+        font-size: map.get($mobile-style, font-size);
+        line-height: map.get($mobile-style, line-height);
+    }
+}
+
+//------------------light------------------
+$primary-color: #6750a4; // button / 背景用主要顏色
+$on-primary-color: #ffffff; // 按鈕文字用對比色
+$secondary-color: #625b71;
+$on-secondary-color: #ffffff;
+$tertiary-color: #7d5260;
+$on-tertiary-color: #ffffff;
+$error-color: #b3261e;
+$on-error-color: #ffffff;
+
+$primary-container-color: #eaddff; // button / 輕量感容器色 比primary淺 淡
+$on-primary-container-color: #21005d; // 文字用深色以維持對比
+$secondary-container-color: #e8def8;
+$on-secondary-container-color: #1d192b;
+$tertiary-container-color: #ffd8e4;
+$on-tertiary-container-color: #31111d;
+$error-container-color: #f9dedc;
+$on-error-container-color: #410e0b;
+
+$background-color: #fffbfe;
+$on-background-color: #1c1b1f;
+$outline-color: #79747e;
+$surface-color: #fffbfe; // 卡片背景
+$on-surface-color: #1c1b1f; // 卡片文字
+$surface-variant-color: #e7e0ec;
+$on-surface-variant-color: #49454f;
+
+//------------------dark------------------
+$primary-color-dark: #d0bcff;
+$on-primary-color-dark: #381e72;
+$secondary-color-dark: #ccc2dc;
+$on-secondary-color-dark: #332d41;
+$tertiary-color-dark: #efb8c8;
+$on-tertiary-color-dark: #492532;
+$error-color-dark: #f2b8b5;
+$on-error-color-dark: #601410;
+
+$primary-container-color-dark: #4f378b;
+$on-primary-container-color-dark: #eaddff;
+$secondary-container-color-dark: #4a4458;
+$on-secondary-container-color-dark: #e8def8;
+$tertiary-container-color-dark: #633b48;
+$on-tertiary-container-color-dark: #ffd8e4;
+$error-container-color-dark: #8c1d18;
+$on-error-container-color-dark: #f9dedc;
+
+$background-color-dark: #1c1b1f;
+$on-background-color-dark: #e6e1e5;
+$outline-color-dark: #938f99;
+$surface-color-dark: #1c1b1f;
+$on-surface-color-dark: #e6e1e5;
+$surface-variant-color-dark: #49454f;
+$on-surface-variant-color-dark: #cac4d0;
+
+// Path: styles\theme\theme.css

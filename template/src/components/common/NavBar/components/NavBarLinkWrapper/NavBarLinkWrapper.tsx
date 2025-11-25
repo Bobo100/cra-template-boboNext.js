@@ -31,7 +31,11 @@ const NavBarLinkWrapper = ({
       )} ${getLinkClassName(`${className}`, styles)}`}
       onClick={onClick}
     >
-      {fontAwesomeIcon && <FontAwesomeIcon icon={fontAwesomeIcon} />}
+      {fontAwesomeIcon && (
+        <span className={styles.icon}>
+          <FontAwesomeIcon icon={fontAwesomeIcon} />
+        </span>
+      )}
       <span className={styles.linkName}>{name}</span>
     </Link>
   );

@@ -1,7 +1,3 @@
-@use "./variables.module.scss";
-
-// @use "./theme/theme.css";
-
 * {
     box-sizing: border-box;
 }
@@ -12,11 +8,3 @@ a {
     padding: 10px;
     transition: all 0.2s ease-in-out;
 }
-
-// .light {
-//     background-color: $background-color;
-// }
-
-// .dark {
-//     background-color: $background-color-dark;
-// }

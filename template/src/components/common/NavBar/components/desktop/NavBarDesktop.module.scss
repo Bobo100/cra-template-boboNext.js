@@ -1,4 +1,5 @@
-@use "@/styles/variables.module.scss";;
+@use "@/styles/_variables" as *;
+@use "@/styles/_mixins" as mixins;
 
 .navbar {
     position: fixed;
@@ -17,7 +18,7 @@
 
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
 
-    @include rwd-custom($width-2xl) {
+    @include mixins.rwd-custom($width-2xl) {
         padding-left: 0;
         padding-right: 0;
         display: none;
@@ -124,7 +125,7 @@
         transform: scale(0.9);
     }
 
-    @include rwd-custom($width-2xl) {
+    @include mixins.rwd-custom($width-2xl) {
         @include text-style(h4);
     }
 }
@@ -154,16 +155,6 @@
     }
 }
 
-.active_light {
-    // color: $primary-color;
-    // background-color: rgba($primary-container-color, 0.8);
-}
-
-.active_dark {
-    // color: $primary-color;
-    // background-color: rgba($primary-container-color, 0.8);
-}
-
-.linkName {
-    margin-left: 5px;
+.icon {
+    margin-right: 5px;
 }

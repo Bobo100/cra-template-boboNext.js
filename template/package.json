@@ -35,6 +35,7 @@
     "lint": "next lint"
   },
   "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.17",
     "autoprefixer": "^10.4.22",
     "babel-plugin-react-compiler": "^1.0.0",
     "postcss": "^8.5.6",

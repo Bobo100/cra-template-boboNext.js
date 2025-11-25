@@ -1,11 +1,7 @@
 import { Fragment, useRef, useState } from "react";
 import styles from "./NavBarDesktop.module.scss";
 import ThemeToggle from "@/components/Theme/ThemeToggle";
-import {
-  LinkList,
-  LinkListDetail,
-  LinkName,
-} from "@/components/common/LinkList";
+import { LinkList } from "@/components/common/LinkList";
 import useSetStyle from "@/hooks/useSetStyle";
 import useScroll, { mobileWidth } from "../hooks/useScroll";
 import NavBarLinkWrapper from "../NavBarLinkWrapper/NavBarLinkWrapper";
@@ -29,16 +25,6 @@ const NavBarDesktop = () => {
       onClick={(e) => e.stopPropagation()}
     >
       <div className={styles.navbar_container}>
-        {/* <div className={styles.logo_container}>
-          <Link
-            href={LinkListDetail[LinkName.home].href}
-            className={`${styles.logo_title} ${getThemeClassName(
-              "logo_title"
-            )}`}
-          >
-            百百 BLOG
-          </Link>
-        </div> */}
         <div className={`${styles.navbar_menu}`}>
           <div
             className={`${styles.link_container} ${getThemeClassName(
@@ -56,9 +42,11 @@ const NavBarDesktop = () => {
                     onMouseLeave={() => setOpenDropdown(null)}
                   >
                     <span className={styles.link}>
-                      {item.fontAwesomeIcon && (
-                        <FontAwesomeIcon icon={item.fontAwesomeIcon} />
-                      )}{" "}
+                      {/* {item.fontAwesomeIcon && (
+                        <span className={styles.icon}>
+                          <FontAwesomeIcon icon={item.fontAwesomeIcon} />
+                        </span>
+                      )} */}
                       {item.name} ▾
                     </span>
                     {openDropdown === item.name && (

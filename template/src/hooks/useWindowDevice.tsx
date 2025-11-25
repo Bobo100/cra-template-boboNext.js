@@ -1,4 +1,3 @@
-import variables from "@/styles/variables.module.scss";
 import useWindowSize from "./useWindowSize";
 import { useMemo } from "react";
 
