@@ -1,6 +1,6 @@
 import { Fragment, useRef, useState } from "react";
 import styles from "./NavBarDesktop.module.scss";
-import ThemeToggle from "@/components/Theme/ThemeToggle";
+import ThemeToggle from "@/components/features/Theme/ThemeToggle";
 import { LinkList, NavLinkItem } from "@/components/common/LinkList";
 import useSetStyle from "@/hooks/useSetStyle";
 import useScroll from "../hooks/useScroll";

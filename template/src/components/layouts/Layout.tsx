@@ -1,7 +1,7 @@
 import Head from "next/head";
-import NavBar from "./common/NavBar/NavBar";
-import Footer from "./common/Footer/Footer";
-import styles from "./layout.module.scss";
+import NavBar from "../common/NavBar/NavBar";
+import Footer from "../common/Footer/Footer";
+import styles from "./Layout.module.scss";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";

@@ -1,8 +1,15 @@
 {
   "name": "my-app",
-  "version": "0.0.1",
+  "version": "0.1.0",
+  "description": "A Next.js project created with cra-template-bobonext.js",
   "homepage": "https://{yourgithubname}.github.io/{projectname}/",
   "private": true,
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^7.1.0",
     "@fortawesome/free-solid-svg-icons": "^7.1.0",

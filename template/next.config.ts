@@ -18,7 +18,6 @@ const nextConfig: NextConfig = {
   },
   i18n: { locales: ["zh-TW"], defaultLocale: "zh-TW" },
   images: {
-    domains: ["i.imgur.com"],
     remotePatterns: [
       { protocol: "https", hostname: "i.imgur.com" },
       {

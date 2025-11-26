@@ -1,6 +1,8 @@
-// components/redux/store/store.tsx
+/**
+ * Redux Store 配置
+ */
 import { configureStore } from '@reduxjs/toolkit'
-import async from '../slice/asyncSlice'
+import async from './slices/asyncSlice'
 
 export const store = configureStore({
     reducer: {

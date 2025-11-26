@@ -1,9 +1,33 @@
 {
   "name": "cra-template-bobonext.js",
-  "version": "0.10.0",
+  "version": "0.12.0",
+  "description": "A modern Next.js template with TypeScript, Tailwind CSS, Redux Toolkit, and theme support",
+  "keywords": [
+    "cra-template",
+    "nextjs",
+    "typescript",
+    "tailwind",
+    "redux",
+    "theme",
+    "pwa"
+  ],
+  "license": "MIT",
+  "author": "Bobo100",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Bobo100/cra-template-boboNext.js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Bobo100/cra-template-boboNext.js/issues"
+  },
+  "homepage": "https://github.com/Bobo100/cra-template-boboNext.js#readme",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "files": [
     "template",
-    "template.json"
+    "template.json",
+    "README.md"
   ],
   "dependencies": {
     "@tailwindcss/postcss": "^4.1.17",

@@ -354,6 +354,133 @@ useEffect(() => {
 if (!mounted) return null;
 ```
 
+## 顏色快速參考
+
+### 常用顏色變數
+
+| 類別 | CSS Variable | 用途 |
+|------|-------------|------|
+| **品牌色** | `--color-primary` | 主要品牌色 |
+| | `--color-secondary` | 次要品牌色 |
+| | `--color-accent` | 強調色 |
+| **背景** | `--color-background` | 頁面背景 |
+| | `--color-surface` | 卡片/面板背景 |
+| **文字** | `--color-text-primary` | 主要文字 |
+| | `--color-text-secondary` | 次要文字 |
+| | `--color-text-tertiary` | 第三級文字 |
+| **邊框** | `--color-border` | 邊框 |
+| | `--color-divider` | 分隔線 |
+| **狀態** | `--color-success` | 成功 |
+| | `--color-warning` | 警告 |
+| | `--color-error` | 錯誤 |
+| | `--color-info` | 資訊 |
+
+### Utility Classes 快速參考
+
+```html
+<!-- 背景色 -->
+<div class="bg-primary">主色背景</div>
+<div class="bg-surface">表面色背景</div>
+
+<!-- 文字色 -->
+<p class="text-primary">主要文字</p>
+<p class="text-secondary">次要文字</p>
+
+<!-- 邊框與陰影 -->
+<div class="border-default shadow-default">預設樣式</div>
+```
+
+## CSS Variables ↔️ SCSS Variables 對照表
+
+### 品牌色對照
+
+| CSS Variable | Light SCSS | Dark SCSS |
+|-------------|-----------|----------|
+| `--color-primary` | `$primary-light` (#4f46e5) | `$primary-dark` (#6366f1) |
+| `--color-primary-hover` | `$primary-hover-light` (#4338ca) | `$primary-hover-dark` (#818cf8) |
+| `--color-secondary` | `$secondary-light` (#10b981) | `$secondary-dark` (#34d399) |
+| `--color-accent` | `$accent-light` (#f59e0b) | `$accent-dark` (#fbbf24) |
+
+### 背景與表面對照
+
+| CSS Variable | Light SCSS | Dark SCSS |
+|-------------|-----------|----------|
+| `--color-background` | `$background-light` (#ffffff) | `$background-dark` (#0f172a) |
+| `--color-surface` | `$surface-light` (#ffffff) | `$surface-dark` (#1e293b) |
+
+### 文字顏色對照
+
+| CSS Variable | Light SCSS | Dark SCSS |
+|-------------|-----------|----------|
+| `--color-text-primary` | `$text-primary-light` (#111827) | `$text-primary-dark` (#f1f5f9) |
+| `--color-text-secondary` | `$text-secondary-light` (#6b7280) | `$text-secondary-dark` (#94a3b8) |
+| `--color-text-tertiary` | `$text-tertiary-light` (#9ca3af) | `$text-tertiary-dark` (#64748b) |
+
+### 狀態顏色對照
+
+| CSS Variable | Light SCSS | Dark SCSS |
+|-------------|-----------|----------|
+| `--color-success` | `$success-light` (#10b981) | `$success-dark` (#34d399) |
+| `--color-warning` | `$warning-light` (#f59e0b) | `$warning-dark` (#fbbf24) |
+| `--color-error` | `$error-light` (#ef4444) | `$error-dark` (#f87171) |
+| `--color-info` | `$info-light` (#3b82f6) | `$info-dark` (#60a5fa) |
+
+## 顏色使用指南
+
+### 選擇正確的顏色
+
+**使用 Primary** 🎯
+- 主要 CTA 按鈕
+- 重要連結
+- 選中狀態
+- 主要圖示
+
+**使用 Secondary** 🌿
+- 次要操作
+- 補充按鈕
+- 成功提示的替代方案
+
+**使用 Accent** ⚡
+- 特殊強調
+- 促銷/新功能標記
+- 吸引注意力的元素
+
+**使用 Surface** 📄
+- 卡片背景
+- 模態視窗
+- 下拉選單
+- 側邊欄
+
+**使用 Text 層級** ✍️
+- **Primary**: 標題、主要內容
+- **Secondary**: 說明文字、副標題
+- **Tertiary**: 輔助資訊
+- **Disabled**: 禁用狀態文字
+
+**使用 State 顏色** 🚦
+- **Success**: 成功訊息、完成狀態
+- **Warning**: 警告訊息、注意事項
+- **Error**: 錯誤訊息、驗證失敗
+- **Info**: 提示訊息、說明資訊
+
+### 無障礙對比度
+
+所有顏色組合都經過設計，確保符合 WCAG 2.1 AA 級別：
+
+✅ **高對比度組合** (適用於所有文字和重要 UI)
+- Primary + On-Primary
+- Secondary + On-Secondary
+- Surface + On-Surface
+- Background + Text-Primary
+
+⚠️ **中等對比度組合** (適用於大文字或圖示)
+- Background + Text-Secondary
+- Surface + Text-Tertiary
+
+❌ **避免使用**
+- Text-Disabled 用於重要資訊
+- 低對比度的自定義組合
+
 ## 更多資源
 
 - [Material Design 3 Color System](https://m3.material.io/styles/color/overview)

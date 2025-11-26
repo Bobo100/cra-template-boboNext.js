@@ -5,7 +5,8 @@
 /.pnp
 .pnp.js
 
-/template/node_modules
+# IMPORTANT: 排除 template 內的 node_modules
+template/node_modules/
 /template/.pnp
 /template/.pnp.js
 

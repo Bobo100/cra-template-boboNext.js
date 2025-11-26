@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useRef, useState } from "react";
 import styles from "./NavBarMobile.module.scss";
-import ThemeToggle from "@/components/Theme/ThemeToggle";
+import ThemeToggle from "@/components/features/Theme/ThemeToggle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import useScroll, { mobileWidth } from "../hooks/useScroll";
