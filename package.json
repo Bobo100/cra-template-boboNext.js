@@ -1,6 +1,6 @@
 {
   "name": "cra-template-bobonext.js",
-  "version": "0.12.0",
+  "version": "0.12.1",
   "description": "A modern Next.js template with TypeScript, Tailwind CSS, Redux Toolkit, and theme support",
   "keywords": [
     "cra-template",
