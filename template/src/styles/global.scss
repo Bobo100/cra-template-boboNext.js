@@ -1,10 +1,237 @@
+@use "variables" as *;
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 * {
     box-sizing: border-box;
+}
+
+// -------------------------------
+// CSS Custom Properties (CSS Variables)
+// -------------------------------
+:root {
+    // Primary Colors
+    --color-primary: #{$primary-light};
+    --color-primary-hover: #{$primary-hover-light};
+    --color-primary-active: #{$primary-active-light};
+    --color-on-primary: #{$on-primary-light};
+
+    // Secondary Colors
+    --color-secondary: #{$secondary-light};
+    --color-secondary-hover: #{$secondary-hover-light};
+    --color-secondary-active: #{$secondary-active-light};
+    --color-on-secondary: #{$on-secondary-light};
+
+    // Accent Colors
+    --color-accent: #{$accent-light};
+    --color-accent-hover: #{$accent-hover-light};
+    --color-on-accent: #{$on-accent-light};
+
+    // Background Colors
+    --color-background: #{$background-light};
+    --color-background-secondary: #{$background-secondary-light};
+    --color-background-tertiary: #{$background-tertiary-light};
+    --color-on-background: #{$on-background-light};
+
+    // Surface Colors
+    --color-surface: #{$surface-light};
+    --color-surface-hover: #{$surface-hover-light};
+    --color-on-surface: #{$on-surface-light};
+
+    // Text Colors
+    --color-text-primary: #{$text-primary-light};
+    --color-text-secondary: #{$text-secondary-light};
+    --color-text-tertiary: #{$text-tertiary-light};
+    --color-text-disabled: #{$text-disabled-light};
+
+    // Border Colors
+    --color-border: #{$border-light};
+    --color-border-hover: #{$border-hover-light};
+    --color-divider: #{$divider-light};
+
+    // State Colors
+    --color-success: #{$success-light};
+    --color-on-success: #{$on-success-light};
+    --color-warning: #{$warning-light};
+    --color-on-warning: #{$on-warning-light};
+    --color-error: #{$error-light};
+    --color-on-error: #{$on-error-light};
+    --color-info: #{$info-light};
+    --color-on-info: #{$on-info-light};
+
+    // Container Colors
+    --color-primary-container: #{$primary-container-light};
+    --color-on-primary-container: #{$on-primary-container-light};
+    --color-secondary-container: #{$secondary-container-light};
+    --color-on-secondary-container: #{$on-secondary-container-light};
+    --color-error-container: #{$error-container-light};
+    --color-on-error-container: #{$on-error-container-light};
+
+    // Shadow & Overlay
+    --color-shadow: #{$shadow-light};
+    --color-shadow-hover: #{$shadow-hover-light};
+    --color-overlay: #{$overlay-light};
+}
+
+// Dark Theme
+.dark {
+    // Primary Colors
+    --color-primary: #{$primary-dark};
+    --color-primary-hover: #{$primary-hover-dark};
+    --color-primary-active: #{$primary-active-dark};
+    --color-on-primary: #{$on-primary-dark};
+
+    // Secondary Colors
+    --color-secondary: #{$secondary-dark};
+    --color-secondary-hover: #{$secondary-hover-dark};
+    --color-secondary-active: #{$secondary-active-dark};
+    --color-on-secondary: #{$on-secondary-dark};
+
+    // Accent Colors
+    --color-accent: #{$accent-dark};
+    --color-accent-hover: #{$accent-hover-dark};
+    --color-on-accent: #{$on-accent-dark};
+
+    // Background Colors
+    --color-background: #{$background-dark};
+    --color-background-secondary: #{$background-secondary-dark};
+    --color-background-tertiary: #{$background-tertiary-dark};
+    --color-on-background: #{$on-background-dark};
+
+    // Surface Colors
+    --color-surface: #{$surface-dark};
+    --color-surface-hover: #{$surface-hover-dark};
+    --color-on-surface: #{$on-surface-dark};
+
+    // Text Colors
+    --color-text-primary: #{$text-primary-dark};
+    --color-text-secondary: #{$text-secondary-dark};
+    --color-text-tertiary: #{$text-tertiary-dark};
+    --color-text-disabled: #{$text-disabled-dark};
+
+    // Border Colors
+    --color-border: #{$border-dark};
+    --color-border-hover: #{$border-hover-dark};
+    --color-divider: #{$divider-dark};
+
+    // State Colors
+    --color-success: #{$success-dark};
+    --color-on-success: #{$on-success-dark};
+    --color-warning: #{$warning-dark};
+    --color-on-warning: #{$on-warning-dark};
+    --color-error: #{$error-dark};
+    --color-on-error: #{$on-error-dark};
+    --color-info: #{$info-dark};
+    --color-on-info: #{$on-info-dark};
+
+    // Container Colors
+    --color-primary-container: #{$primary-container-dark};
+    --color-on-primary-container: #{$on-primary-container-dark};
+    --color-secondary-container: #{$secondary-container-dark};
+    --color-on-secondary-container: #{$on-secondary-container-dark};
+    --color-error-container: #{$error-container-dark};
+    --color-on-error-container: #{$on-error-container-dark};
+
+    // Shadow & Overlay
+    --color-shadow: #{$shadow-dark};
+    --color-shadow-hover: #{$shadow-hover-dark};
+    --color-overlay: #{$overlay-dark};
+}
+
+// -------------------------------
+// Global Styles with Theme Support
+// -------------------------------
+body {
+    margin: 0;
+    // 使用 CSS Variables 以支援動態主題切換
+    background-color: var(--color-background);
+    color: var(--color-text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 a {
     display: inline-block;
     text-decoration: none;
     padding: 10px;
+    // 使用 CSS Variables 以支援動態主題切換
+    color: var(--color-primary);
     transition: all 0.2s ease-in-out;
+
+    &:hover {
+        color: var(--color-primary-hover);
+    }
+
+    &:active {
+        color: var(--color-primary-active);
+    }
+}
+
+// -------------------------------
+// Theme-aware Helper Classes
+// 這些類別可以在不使用 CSS Variables 的情況下使用
+// -------------------------------
+.theme-bg-primary {
+    background-color: $primary-light;
+
+    .dark & {
+        background-color: $primary-dark;
+    }
+}
+
+.theme-text-primary {
+    color: $text-primary-light;
+
+    .dark & {
+        color: $text-primary-dark;
+    }
+}
+
+.theme-border {
+    border-color: $border-light;
+
+    .dark & {
+        border-color: $border-dark;
+    }
+}
+
+// -------------------------------
+// Utility Classes
+// -------------------------------
+.bg-primary {
+    background-color: var(--color-primary);
+    color: var(--color-on-primary);
+}
+
+.bg-secondary {
+    background-color: var(--color-secondary);
+    color: var(--color-on-secondary);
+}
+
+.bg-surface {
+    background-color: var(--color-surface);
+    color: var(--color-on-surface);
+}
+
+.text-primary {
+    color: var(--color-text-primary);
+}
+
+.text-secondary {
+    color: var(--color-text-secondary);
+}
+
+.border-default {
+    border: 1px solid var(--color-border);
+}
+
+.shadow-default {
+    box-shadow: 0 1px 3px 0 var(--color-shadow),
+        0 1px 2px -1px var(--color-shadow);
+}
+
+.shadow-hover {
+    box-shadow: 0 4px 6px -1px var(--color-shadow-hover),
+        0 2px 4px -2px var(--color-shadow-hover);
 }

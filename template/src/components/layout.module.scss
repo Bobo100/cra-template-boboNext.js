@@ -1,4 +1,4 @@
-@use "@/styles/_variables.scss" as *;
+@use "@/styles/_variables" as *;
 
 .container {
     position: relative;
@@ -11,6 +11,12 @@
 
 .container_light {
     background-color: $background-color;
+}
+
+// 內容區域 - 避開固定的 NavBar
+.content {
+    padding-top: $navbar-height;
+    min-height: calc(100vh - $navbar-height); // 確保至少佔滿螢幕高度
 }
 
 /* styles/ProgressBar.css */

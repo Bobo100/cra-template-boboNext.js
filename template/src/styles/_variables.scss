@@ -1,8 +1,7 @@
-@use "@/styles/mixins.scss" as *;
 @use "sass:map";
 
 //---------------common-variables
-$navbar-height: 100px;
+$navbar-height: 64px; // 統一 NavBar 高度
 $max-width: 1440px;
 
 $width-sm: 640px;
@@ -10,11 +9,6 @@ $width-md: 768px;
 $width-lg: 1024px;
 $width-xl: 1280px;
 $width-2xl: 1536px;
-
-// :export {
-//     navbarHeight: $navbar-height;
-//     width2XL: $width-2xl;
-// }
 
 // -------------------------------
 // Base Font Sizes (rem)
@@ -217,58 +211,191 @@ $typography-mobile: (
     }
 }
 
-//------------------light------------------
-$primary-color: #6750a4; // button / 背景用主要顏色
-$on-primary-color: #ffffff; // 按鈕文字用對比色
-$secondary-color: #625b71;
-$on-secondary-color: #ffffff;
-$tertiary-color: #7d5260;
-$on-tertiary-color: #ffffff;
-$error-color: #b3261e;
-$on-error-color: #ffffff;
+// -------------------------------
+// Light Theme Colors
+// -------------------------------
+// Primary Colors
+$primary-light: #4f46e5; // Indigo-600
+$primary-hover-light: #4338ca; // Indigo-700
+$primary-active-light: #3730a3; // Indigo-800
+$on-primary-light: #ffffff;
 
-$primary-container-color: #eaddff; // button / 輕量感容器色 比primary淺 淡
-$on-primary-container-color: #21005d; // 文字用深色以維持對比
-$secondary-container-color: #e8def8;
-$on-secondary-container-color: #1d192b;
-$tertiary-container-color: #ffd8e4;
-$on-tertiary-container-color: #31111d;
-$error-container-color: #f9dedc;
-$on-error-container-color: #410e0b;
+// Secondary Colors
+$secondary-light: #10b981; // Emerald-500
+$secondary-hover-light: #059669; // Emerald-600
+$secondary-active-light: #047857; // Emerald-700
+$on-secondary-light: #ffffff;
 
-$background-color: #fffbfe;
-$on-background-color: #1c1b1f;
-$outline-color: #79747e;
-$surface-color: #fffbfe; // 卡片背景
-$on-surface-color: #1c1b1f; // 卡片文字
-$surface-variant-color: #e7e0ec;
-$on-surface-variant-color: #49454f;
+// Accent Colors
+$accent-light: #f59e0b; // Amber-500
+$accent-hover-light: #d97706; // Amber-600
+$on-accent-light: #ffffff;
 
-//------------------dark------------------
-$primary-color-dark: #d0bcff;
-$on-primary-color-dark: #381e72;
-$secondary-color-dark: #ccc2dc;
-$on-secondary-color-dark: #332d41;
-$tertiary-color-dark: #efb8c8;
-$on-tertiary-color-dark: #492532;
-$error-color-dark: #f2b8b5;
-$on-error-color-dark: #601410;
+// Background Colors
+$background-light: #ffffff;
+$background-secondary-light: #f9fafb; // Gray-50
+$background-tertiary-light: #f3f4f6; // Gray-100
+$on-background-light: #111827; // Gray-900
 
-$primary-container-color-dark: #4f378b;
-$on-primary-container-color-dark: #eaddff;
-$secondary-container-color-dark: #4a4458;
-$on-secondary-container-color-dark: #e8def8;
-$tertiary-container-color-dark: #633b48;
-$on-tertiary-container-color-dark: #ffd8e4;
-$error-container-color-dark: #8c1d18;
-$on-error-container-color-dark: #f9dedc;
+// Surface Colors (for cards, panels)
+$surface-light: #ffffff;
+$surface-hover-light: #f9fafb; // Gray-50
+$on-surface-light: #111827; // Gray-900
 
-$background-color-dark: #1c1b1f;
-$on-background-color-dark: #e6e1e5;
-$outline-color-dark: #938f99;
-$surface-color-dark: #1c1b1f;
-$on-surface-color-dark: #e6e1e5;
-$surface-variant-color-dark: #49454f;
-$on-surface-variant-color-dark: #cac4d0;
+// Text Colors
+$text-primary-light: #111827; // Gray-900
+$text-secondary-light: #6b7280; // Gray-500
+$text-tertiary-light: #9ca3af; // Gray-400
+$text-disabled-light: #d1d5db; // Gray-300
 
-// Path: styles\theme\theme.css
+// Border Colors
+$border-light: #e5e7eb; // Gray-200
+$border-hover-light: #d1d5db; // Gray-300
+$divider-light: #f3f4f6; // Gray-100
+
+// State Colors
+$success-light: #10b981; // Emerald-500
+$on-success-light: #ffffff;
+$warning-light: #f59e0b; // Amber-500
+$on-warning-light: #ffffff;
+$error-light: #ef4444; // Red-500
+$on-error-light: #ffffff;
+$info-light: #3b82f6; // Blue-500
+$on-info-light: #ffffff;
+
+// Container Colors (subtle backgrounds)
+$primary-container-light: #eef2ff; // Indigo-50
+$on-primary-container-light: #312e81; // Indigo-900
+$secondary-container-light: #d1fae5; // Emerald-100
+$on-secondary-container-light: #064e3b; // Emerald-900
+$error-container-light: #fee2e2; // Red-100
+$on-error-container-light: #7f1d1d; // Red-900
+
+// Shadow Colors
+$shadow-light: rgba(0, 0, 0, 0.1);
+$shadow-hover-light: rgba(0, 0, 0, 0.15);
+
+// Overlay
+$overlay-light: rgba(0, 0, 0, 0.5);
+
+// -------------------------------
+// Dark Theme Colors
+// -------------------------------
+// Primary Colors
+$primary-dark: #6366f1; // Indigo-500
+$primary-hover-dark: #818cf8; // Indigo-400
+$primary-active-dark: #a5b4fc; // Indigo-300
+$on-primary-dark: #ffffff;
+
+// Secondary Colors
+$secondary-dark: #34d399; // Emerald-400
+$secondary-hover-dark: #6ee7b7; // Emerald-300
+$secondary-active-dark: #a7f3d0; // Emerald-200
+$on-secondary-dark: #064e3b; // Emerald-900
+
+// Accent Colors
+$accent-dark: #fbbf24; // Amber-400
+$accent-hover-dark: #fcd34d; // Amber-300
+$on-accent-dark: #78350f; // Amber-900
+
+// Background Colors
+$background-dark: #0f172a; // Slate-900
+$background-secondary-dark: #1e293b; // Slate-800
+$background-tertiary-dark: #334155; // Slate-700
+$on-background-dark: #f1f5f9; // Slate-100
+
+// Surface Colors (for cards, panels)
+$surface-dark: #1e293b; // Slate-800
+$surface-hover-dark: #334155; // Slate-700
+$on-surface-dark: #f1f5f9; // Slate-100
+
+// Text Colors
+$text-primary-dark: #f1f5f9; // Slate-100
+$text-secondary-dark: #94a3b8; // Slate-400
+$text-tertiary-dark: #64748b; // Slate-500
+$text-disabled-dark: #475569; // Slate-600
+
+// Border Colors
+$border-dark: #334155; // Slate-700
+$border-hover-dark: #475569; // Slate-600
+$divider-dark: #1e293b; // Slate-800
+
+// State Colors
+$success-dark: #34d399; // Emerald-400
+$on-success-dark: #064e3b; // Emerald-900
+$warning-dark: #fbbf24; // Amber-400
+$on-warning-dark: #78350f; // Amber-900
+$error-dark: #f87171; // Red-400
+$on-error-dark: #7f1d1d; // Red-900
+$info-dark: #60a5fa; // Blue-400
+$on-info-dark: #1e3a8a; // Blue-900
+
+// Container Colors (subtle backgrounds)
+$primary-container-dark: #312e81; // Indigo-900
+$on-primary-container-dark: #e0e7ff; // Indigo-100
+$secondary-container-dark: #064e3b; // Emerald-900
+$on-secondary-container-dark: #d1fae5; // Emerald-100
+$error-container-dark: #7f1d1d; // Red-900
+$on-error-container-dark: #fee2e2; // Red-100
+
+// Shadow Colors
+$shadow-dark: rgba(0, 0, 0, 0.3);
+$shadow-hover-dark: rgba(0, 0, 0, 0.5);
+
+// Overlay
+$overlay-dark: rgba(0, 0, 0, 0.7);
+
+// -------------------------------
+// Legacy Variable Support (for backward compatibility)
+// -------------------------------
+$primary-color: $primary-light;
+$on-primary-color: $on-primary-light;
+$secondary-color: $secondary-light;
+$on-secondary-color: $on-secondary-light;
+$tertiary-color: $accent-light;
+$on-tertiary-color: $on-accent-light;
+$error-color: $error-light;
+$on-error-color: $on-error-light;
+
+$primary-container-color: $primary-container-light;
+$on-primary-container-color: $on-primary-container-light;
+$secondary-container-color: $secondary-container-light;
+$on-secondary-container-color: $on-secondary-container-light;
+$tertiary-container-color: #fff7ed; // Amber-50
+$on-tertiary-container-color: #78350f; // Amber-900
+$error-container-color: $error-container-light;
+$on-error-container-color: $on-error-container-light;
+
+$background-color: $background-light;
+$on-background-color: $on-background-light;
+$outline-color: $border-light;
+$surface-color: $surface-light;
+$on-surface-color: $on-surface-light;
+$surface-variant-color: $background-secondary-light;
+$on-surface-variant-color: $text-secondary-light;
+
+$primary-color-dark: $primary-dark;
+$on-primary-color-dark: $on-primary-dark;
+$secondary-color-dark: $secondary-dark;
+$on-secondary-color-dark: $on-secondary-dark;
+$tertiary-color-dark: $accent-dark;
+$on-tertiary-color-dark: $on-accent-dark;
+$error-color-dark: $error-dark;
+$on-error-color-dark: $on-error-dark;
+
+$primary-container-color-dark: $primary-container-dark;
+$on-primary-container-color-dark: $on-primary-container-dark;
+$secondary-container-color-dark: $secondary-container-dark;
+$on-secondary-container-color-dark: $on-secondary-container-dark;
+$tertiary-container-color-dark: #78350f; // Amber-900
+$on-tertiary-container-color-dark: #fff7ed; // Amber-50
+$error-container-color-dark: $error-container-dark;
+$on-error-container-color-dark: $on-error-container-dark;
+
+$background-color-dark: $background-dark;
+$on-background-color-dark: $on-background-dark;
+$outline-color-dark: $border-dark;
+$surface-color-dark: $surface-dark;
+$on-surface-color-dark: $on-surface-dark;
+$surface-variant-color-dark: $background-secondary-dark;
+$on-surface-variant-color-dark: $text-secondary-dark;

@@ -1,23 +1,25 @@
-@use "@/styles/_variables" as *;
-@use "@/styles/_mixins" as mixins;
+@use "@/styles/index" as *;
 
+// ========================================
+// Mobile NavBar - 現代化設計
+// ========================================
 
 .navbar {
     position: fixed;
     top: 0;
     width: 100%;
     height: $navbar-height;
-    z-index: 20;
-    transition: top 0.3s;
+    z-index: 1000;
+    transition: top 0.3s ease, box-shadow 0.3s ease;
 
     display: flex;
     justify-content: center;
-    padding-left: 0;
-    padding-right: 0;
+    align-items: center;
+    padding: 0;
 
-    overflow-y: hidden;
-
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+    background-color: var(--color-surface);
+    border-bottom: 1px solid var(--color-divider);
+    box-shadow: 0 2px 8px var(--color-shadow);
 
     &[data-hidden="true"] {
         display: none;
@@ -27,10 +29,12 @@
 .navbar_container {
     position: relative;
     width: 100%;
+    max-width: 1440px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-right: 10px;
+    padding: 0 20px;
+    height: 100%;
 }
 
 .navbar_Hidden {
@@ -38,215 +42,301 @@
 }
 
 .nav_light {
-    &:before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(255, 255, 255, 0.5);
-
-        -webkit-backdrop-filter: blur(10px);
-        backdrop-filter: blur(10px);
-        z-index: -1;
-    }
+    background-color: var(--color-surface);
 }
 
 .nav_dark {
-    &:before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-
-        -webkit-backdrop-filter: blur(10px);
-        backdrop-filter: blur(10px);
-        z-index: -1;
-    }
+    background-color: var(--color-surface);
 }
 
+// ========================================
+// Logo 區域
+// ========================================
 .logo_container {
     display: flex;
     align-items: center;
+    gap: 12px;
 }
 
 .logo_title {
-    font-size: $h1-font-size;
+    @include text-style("h4");
     font-weight: 700;
-    margin-left: 16px;
     cursor: pointer;
+    color: var(--color-primary);
 }
 
+// ========================================
+// 選單容器 - 側邊滑入式設計
+// ========================================
 .navbar_menu {
     position: fixed;
-    top: $navbar-height;
-    left: 0;
+    top: 0;
     right: 0;
     bottom: 0;
-    z-index: 20;
+    width: 100%;
+    max-width: 320px; // 側邊欄寬度
+    z-index: 999;
     pointer-events: none;
 
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
 }
 
 .navbar_menu_active {
-    pointer-events: unset;
+    pointer-events: auto;
 }
 
+// ========================================
+// 連結容器 - 現代化設計
+// ========================================
 .link_container {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    gap: 4px;
+    padding: 80px 20px 20px; // 頂部留空間給關閉按鈕
 
     width: 100%;
-
+    height: 100%;
+    overflow-y: auto;
     overflow-x: hidden;
+    z-index: 999; // 必須高於 overlay (998)，才能點擊選單項目
 
-    border-radius: 0 0 15px 15px;
+    background-color: var(--color-surface);
+    box-shadow: -4px 0 24px var(--color-shadow-hover);
 
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
+    transform: translateX(100%); // 從右側滑入
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 
-    transform: translateX(-100%);
-    transition: transform 0.5s ease;
+    // 滾動條樣式
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
 
-    a {
-        text-align: center;
-        padding: 1.5rem;
-        width: 100%;
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: var(--color-border);
+        border-radius: 3px;
+
+        &:hover {
+            background: var(--color-border-hover);
+        }
     }
 }
 
 .link_container_light {
-    background-color: rgba($background-color, 0.5);
+    background-color: var(--color-surface);
 }
 
 .link_container_dark {
-    background-color: rgba($background-color-dark, 0.5);
+    background-color: var(--color-surface);
 }
 
 .link_container_active {
-    transform: translateX(0%);
+    transform: translateX(0);
 }
 
+// ========================================
+// 漢堡選單按鈕 - 現代化設計
+// ========================================
 .mobile_icon {
     display: flex;
     align-items: center;
-
-    cursor: pointer;
-    font-size: $h1-font-size;
-    height: 50px;
     justify-content: center;
-    width: 50px;
+
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    
+    cursor: pointer;
+    font-size: 20px;
+    
+    background-color: transparent;
+    color: var(--color-text-primary);
+    border: 2px solid var(--color-border);
+    
+    transition: all 0.2s ease;
+
+    &:hover {
+        background-color: var(--color-primary-container);
+        border-color: var(--color-primary);
+        color: var(--color-primary);
+        transform: scale(1.05);
+    }
+
+    &:active {
+        transform: scale(0.95);
+    }
+
+    svg {
+        transition: transform 0.3s ease;
+    }
 }
 
-.mobile_icon_light {
-    color: #000;
-    border: 1px solid #000;
-}
-
-.mobile_icon_dark {
-    color: #fff;
-    border: 1px solid #fff;
-}
-
+// ========================================
+// 連結樣式 - 現代卡片式設計
+// ========================================
 .link {
-    border-radius: 15px;
-}
-
-.link_light {
-    color: $on-background-color;
-
-    &:hover {
-        color: $on-primary-container-color;
-        background-color: $primary-container-color;
-    }
-
-    border-top: 1px solid $on-background-color;
-
-    &:nth-last-child(2) {
-        border-bottom: 1px solid $on-background-color;
-    }
-}
-
-.link_dark {
-    color: $on-background-color-dark;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    
+    padding: 16px 20px;
+    border-radius: 12px;
+    
+    @include text-style("body");
+    font-weight: 500;
+    text-decoration: none;
+    
+    color: var(--color-text-primary);
+    background-color: transparent;
+    border: 1px solid transparent;
+    
+    transition: all 0.2s ease;
+    cursor: pointer;
 
     &:hover {
-        color: $on-primary-container-color-dark;
-        background-color: $primary-container-color-dark;
+        background-color: var(--color-primary-container);
+        color: var(--color-primary);
+        border-color: var(--color-primary);
+        transform: translateX(4px);
     }
 
-    border-top: 1px solid $on-background-color-dark;
+    &:active {
+        transform: translateX(2px);
+    }
 
-    &:nth-last-child(2) {
-        border-bottom: 1px solid $on-background-color-dark;
+    .icon {
+        font-size: 18px;
+        width: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0.8;
+    }
+
+    .linkName {
+        flex: 1;
     }
 }
 
-.active_light {
-    color: $on-primary-color;
-    background-color: rgba($primary-color, 0.8);
-}
-
+// Active 狀態 - 當前頁面
+.active_light,
 .active_dark {
-    color: $on-primary-color-dark;
-    background-color: rgba($primary-color-dark, 0.8);
+    background-color: var(--color-primary);
+    color: var(--color-on-primary);
+    border-color: var(--color-primary);
+    font-weight: 600;
+
+    .icon {
+        opacity: 1;
+    }
+
+    &:hover {
+        background-color: var(--color-primary-hover);
+        border-color: var(--color-primary-hover);
+        color: var(--color-on-primary);
+    }
 }
 
+// ========================================
+// 背景遮罩 - 點擊關閉選單
+// ========================================
 .overlay {
-    flex: 1;
-    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 998;
+    
+    background-color: var(--color-overlay);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    
+    opacity: 0;
+    animation: fadeIn 0.3s ease forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
 }
 
 .overlay_light {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
 .overlay_dark {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.6);
 }
 
-.linkName {
-    margin-left: 5px;
-}
-
+// ========================================
+// 下拉選單（如果需要）
+// ========================================
 .dropdown {
     display: flex;
     flex-direction: column;
+    gap: 4px;
 
     .dropdown_toggle {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 12px;
-        background: none;
-        border: none;
-        width: 100%;
-        font-size: 1rem;
+        gap: 12px;
+        
+        padding: 16px 20px;
+        border-radius: 12px;
+        
+        background: transparent;
+        border: 1px solid var(--color-border);
+        
+        @include text-style("body");
+        font-weight: 500;
+        color: var(--color-text-primary);
+        
         cursor: pointer;
-        color: inherit;
+        transition: all 0.2s ease;
+
+        &:hover {
+            background-color: var(--color-surface-hover);
+            border-color: var(--color-primary);
+        }
     }
 
     .dropdown_menu {
         display: flex;
         flex-direction: column;
-        padding-left: 16px; // 子項目縮排
+        gap: 4px;
+        padding-left: 16px;
+        margin-top: 4px;
+        
+        .link {
+            font-size: 0.95rem;
+        }
     }
 
     .chevron {
-        margin-left: auto;
-        transition: transform 0.2s ease;
+        font-size: 14px;
+        transition: transform 0.3s ease;
+        opacity: 0.6;
     }
 
     .chevron_open {
         transform: rotate(180deg);
+    }
+}
+
+// ========================================
+// ThemeToggle 在選單中的樣式
+// ========================================
+.link_container {
+    > div:last-child {
+        margin-top: auto;
+        padding-top: 20px;
+        border-top: 1px solid var(--color-divider);
     }
 }

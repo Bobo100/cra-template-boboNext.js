@@ -1,64 +1,81 @@
 import { Fragment, useEffect, useRef, useState } from "react";
 import styles from "./NavBarMobile.module.scss";
-import Link from "next/link";
 import ThemeToggle from "@/components/Theme/ThemeToggle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faTimes, faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import useScroll, { mobileWidth } from "../hooks/useScroll";
 import useScrollLock from "../hooks/useScrollLock";
 import useWindowSize from "@/hooks/useWindowSize";
-import {
-  LinkList,
-  LinkListDetail,
-  LinkName,
-} from "@/components/common/LinkList";
+import { LinkList, NavLinkItem } from "@/components/common/LinkList";
 import useSetStyle from "@/hooks/useSetStyle";
 import NavBarLinkWrapper from "../NavBarLinkWrapper/NavBarLinkWrapper";
 
-
+/**
+ * 行動版導航列組件
+ * 支援漢堡選單、滑動抽屜和背景遮罩
+ */
 const NavBarMobile = () => {
-  const [click, setClick] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
   const linkContainerRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
 
   const { visible } = useScroll();
-
   const { width } = useWindowSize();
-
   const { lockScroll, unlockScroll } = useScrollLock("navbar_mobile");
-
   const { getThemeClassName } = useSetStyle({ styles });
 
   const isMobile = width < mobileWidth;
 
-  const handleIconClick = () => {
-    if (isMobile && click) {
-      unlockScroll();
-    } else if (isMobile && !click) {
-      lockScroll();
+  /**
+   * 切換選單開關狀態
+   */
+  const handleMenuToggle = () => {
+    if (isMobile) {
+      if (isMenuOpen) {
+        unlockScroll();
+      } else {
+        lockScroll();
+      }
+      setIsMenuOpen(!isMenuOpen);
     }
-    setClick(!click);
   };
 
-  useEffect(() => {
-    const handleResize = () => {
-      if (!isMobile) {
-        unlockScroll();
-        setClick(false);
-      }
-    };
-    handleResize();
-  }, [width]);
+  /**
+   * 關閉選單
+   */
+  const closeMenu = () => {
+    if (isMobile) {
+      setIsMenuOpen(false);
+      unlockScroll();
+    }
+  };
 
+  /**
+   * 監聽視窗大小變化，桌面版時自動關閉選單
+   */
   useEffect(() => {
-    const closeNavbar = (e: MouseEvent) => {
+    if (!isMobile) {
+      unlockScroll();
+      setIsMenuOpen(false);
+    }
+  }, [width, isMobile, unlockScroll]);
+
+  /**
+   * 監聽點擊事件，點擊選單外部時關閉選單
+   */
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
+      
+      // 點擊漢堡圖示時不處理
       if (target.closest(`.${styles.mobile_icon}`)) return;
+      
+      // 點擊選單外部時關閉
       if (!target.closest(`.${styles.link_container}`)) {
-        setClick((prevClick) => {
-          if (prevClick) {
+        setIsMenuOpen((prevState: boolean) => {
+          if (prevState) {
             unlockScroll();
           }
           return false;
@@ -66,128 +83,89 @@ const NavBarMobile = () => {
       }
     };
 
-    window.addEventListener("click", closeNavbar, true);
+    window.addEventListener("click", handleClickOutside, true);
 
     return () => {
-      window.removeEventListener("click", closeNavbar, true);
+      window.removeEventListener("click", handleClickOutside, true);
     };
-  }, [click]);
+  }, [isMenuOpen, unlockScroll]);
 
-  const mobileClose = () => {
-    if (isMobile) {
-      setClick(false);
-      unlockScroll();
+  /**
+   * 渲染單個導航項目
+   */
+  const renderNavItem = (item: NavLinkItem, index: number) => {
+    // 有子選單的情況（行動版直接展開所有子項目）
+    if (item.children && item.children.length > 0) {
+      return (
+        <div key={`mobile-nav-${index}-${item.name}`} className={styles.dropdown}>
+          {item.children.map((child, cIndex) => (
+            <Fragment key={`mobile-dropdown-${index}-${cIndex}-${child.name}`}>
+              <NavBarLinkWrapper
+                {...child}
+                styles={styles}
+                onClick={closeMenu}
+              />
+            </Fragment>
+          ))}
+        </div>
+      );
     }
-  };
 
-  // if (!isMobile) return null;
+    // 一般連結
+    return (
+      <Fragment key={`mobile-nav-${index}-${item.name}`}>
+        <NavBarLinkWrapper
+          {...item}
+          styles={styles}
+          onClick={closeMenu}
+        />
+      </Fragment>
+    );
+  };
 
   return (
     <nav
       id="navbar_mobile"
-      className={`${styles.navbar} ${visible ? "navbar--visible" : styles.navbar_Hidden
-        } ${getThemeClassName("nav")}`}
+      className={`${styles.navbar} ${
+        visible ? "navbar--visible" : styles.navbar_Hidden
+      } ${getThemeClassName("nav")}`}
       onClick={(e) => e.stopPropagation()}
       data-hidden={!isMobile}
+      role="navigation"
+      aria-label="行動版主要導航"
     >
       <div className={styles.navbar_container}>
-        <div className={styles.logo_container}>
-          <Link
-            href={LinkListDetail[LinkName.home].href}
-            className={styles.logo_title}
-          >
-            百百 BLOG
-          </Link>
-        </div>
-        <div
+        <button
           className={`${styles.mobile_icon} ${getThemeClassName(
             "mobile_icon"
           )}`}
-          onClick={handleIconClick}
+          onClick={handleMenuToggle}
+          aria-label={isMenuOpen ? "關閉選單" : "開啟選單"}
+          aria-expanded={isMenuOpen}
         >
-          {click ? (
-            <FontAwesomeIcon icon={faTimes} />
-          ) : (
-            <FontAwesomeIcon icon={faBars} />
-          )}
-        </div>
+          <FontAwesomeIcon icon={isMenuOpen ? faTimes : faBars} />
+        </button>
         <div
-          className={`${styles.navbar_menu} ${click ? styles.navbar_menu_active : ""
-            }`}
+          className={`${styles.navbar_menu} ${
+            isMenuOpen ? styles.navbar_menu_active : ""
+          }`}
         >
           <div
             className={`${styles.link_container} ${getThemeClassName(
               "link_container"
-            )} ${click ? styles.link_container_active : ""}`}
+            )} ${isMenuOpen ? styles.link_container_active : ""}`}
             ref={linkContainerRef}
           >
-            {LinkList.map((item, index) => {
-              // if (item.children) {
-              //   const isOpen = openDropdown === item.name;
-              //   return (
-              //     <div key={index} className={styles.dropdown}>
-              //       <button
-              //         className={styles.link}
-              //         onClick={() => setOpenDropdown(isOpen ? null : item.name)}
-              //       >
-              //         {item.fontAwesomeIcon && <FontAwesomeIcon icon={item.fontAwesomeIcon} />}
-              //         {item.name}
-              //         <FontAwesomeIcon
-              //           icon={faChevronDown}
-              //           className={`${styles.chevron} ${isOpen ? styles.chevron_open : ""}`}
-              //         />
-              //       </button>
-              //       {isOpen && (
-              //         <div className={styles.dropdown_menu}>
-              //           {item.children.map((child, cIndex) => (
-              //             <Fragment key={cIndex}>
-              //               {NavBarLinkWrapper({
-              //                 ...child,
-              //                 styles,
-              //                 onClick: mobileClose,
-              //               })}
-              //             </Fragment>
-              //           ))}
-              //         </div>
-              //       )}
-              //     </div>
-              //   );
-              // }
-
-              if (item.children) {
-                return (
-                  <div key={index} className={styles.dropdown}>
-                    {item.children.map((child, cIndex) => (
-                      <Fragment key={cIndex}>
-                        {NavBarLinkWrapper({
-                          ...child,
-                          styles,
-                          onClick: mobileClose,
-                        })}
-                      </Fragment>
-                    ))}
-                  </div>
-                );
-              }
-              return (
-                <Fragment key={index}>
-                  {NavBarLinkWrapper({
-                    href: item.href,
-                    name: item.name,
-                    className: item.className,
-                    styles,
-                    onClick: mobileClose,
-                    fontAwesomeIcon: item.fontAwesomeIcon,
-                  })}
-                </Fragment>
-              );
-            })}
+            {LinkList.map(renderNavItem)}
             <ThemeToggle />
           </div>
           <div
             ref={overlayRef}
-            className={`${click ? `${styles.overlay} ${getThemeClassName("overlay")}` : ""
-              }`}
+            className={`${
+              isMenuOpen
+                ? `${styles.overlay} ${getThemeClassName("overlay")}`
+                : ""
+            }`}
           ></div>
         </div>
       </div>

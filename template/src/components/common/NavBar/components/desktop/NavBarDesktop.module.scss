@@ -1,24 +1,26 @@
-@use "@/styles/_variables" as *;
-@use "@/styles/_mixins" as mixins;
+@use "@/styles/index" as *;
+
+// ========================================
+// Desktop NavBar - 現代化設計
+// ========================================
 
 .navbar {
     position: fixed;
     top: 0;
     width: 100%;
     height: $navbar-height;
-    z-index: 20;
-    transition: top 0.3s;
+    z-index: 1000;
+    transition: top 0.3s ease, box-shadow 0.3s ease;
 
     display: flex;
     justify-content: center;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding: 0 20px;
 
-    // overflow-y: hidden;
+    background-color: var(--color-surface);
+    border-bottom: 1px solid var(--color-divider);
+    box-shadow: 0 2px 8px var(--color-shadow);
 
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
-
-    @include mixins.rwd-custom($width-2xl) {
+    @include rwd-custom($width-2xl) {
         padding-left: 0;
         padding-right: 0;
         display: none;
@@ -28,8 +30,10 @@
 .navbar_container {
     position: relative;
     width: 100%;
+    max-width: $max-width;
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 
 .navbar_Hidden {
@@ -37,124 +41,191 @@
 }
 
 .nav_light {
-    color: $on-background-color;
-    background-color: $background-color;
+    background-color: var(--color-surface);
 }
 
 .nav_dark {
-    color: $on-background-color-dark;
-    background-color: $background-color-dark;
+    background-color: var(--color-surface);
 }
 
+// ========================================
+// Logo 區域
+// ========================================
 .logo_container {
     display: flex;
     align-items: center;
+    gap: 12px;
 }
 
 .logo_title {
-    font-size: $h1-font-size;
+    @include text-style("h4");
     font-weight: 700;
-    margin-left: 16px;
     cursor: pointer;
+    color: var(--color-primary);
+    transition: color 0.2s ease;
+
+    &:hover {
+        color: var(--color-primary-hover);
+    }
 }
 
-.logo_title_light {
-    color: $on-background-color;
-}
-
-.logo_title_dark {
-    color: $on-background-color-dark;
-}
-
+// ========================================
+// 選單容器
+// ========================================
 .navbar_menu {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    flex-grow: 1;
+    flex: 1;
 }
 
 .link_container {
     display: flex;
-    justify-content: flex-end;
     align-items: center;
+    gap: 8px;
 }
 
+// ========================================
+// 下拉選單
+// ========================================
 .dropdown {
     position: relative;
-    // padding: 0 12px;
     cursor: pointer;
 
-    .dropdown_label {
-        display: inline-block;
+    .link {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 16px;
+        
+        .dropdownIcon {
+            font-size: 12px;
+            margin-left: 4px;
+            transition: transform 0.2s ease;
+        }
+    }
+
+    &:hover .dropdownIcon {
+        transform: rotate(180deg);
     }
 
     .dropdown_menu {
         position: absolute;
-        top: 100%;
+        top: calc(100% + 8px);
         left: 0;
-        background: #222; // 可配合主題
-        min-width: 160px;
-        padding: 8px 0;
-        border-radius: 6px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        z-index: 1000;
+        min-width: 200px;
+        
+        background-color: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: 12px;
+        box-shadow: 0 8px 24px var(--color-shadow-hover);
+        
+        padding: 8px;
+        z-index: 1001;
+
+        animation: dropdownFadeIn 0.2s ease;
 
         a {
-            display: block;
-            padding: 8px 16px;
-            white-space: nowrap;
-            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            
+            padding: 12px 16px;
+            border-radius: 8px;
+            
+            color: var(--color-text-primary);
             text-decoration: none;
+            white-space: nowrap;
+            
+            transition: all 0.2s ease;
 
             &:hover {
-                background: rgba(255, 255, 255, 0.1);
+                background-color: var(--color-primary-container);
+                color: var(--color-primary);
+                transform: translateX(4px);
             }
         }
     }
 }
 
+@keyframes dropdownFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+// ========================================
+// 連結樣式 - 現代化設計
+// ========================================
 .link {
-    @include text-style(h3);
-
-    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    
+    padding: 10px 16px;
+    border-radius: 10px;
+    
+    @include text-style("body");
+    font-weight: 500;
+    text-decoration: none;
+    
+    color: var(--color-text-primary);
+    background-color: transparent;
     border: 1px solid transparent;
-    transition: transform 0.3s ease-in-out;
-    margin-right: 10px;
+    
+    transition: all 0.2s ease;
+    cursor: pointer;
 
     &:hover {
-        transform: scale(0.9);
+        background-color: var(--color-primary-container);
+        color: var(--color-primary);
+        border-color: var(--color-primary);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px var(--color-shadow-hover);
     }
 
-    @include mixins.rwd-custom($width-2xl) {
-        @include text-style(h4);
+    &:active {
+        transform: translateY(0);
+    }
+
+    @include rwd-custom($width-2xl) {
+        padding: 8px 12px;
+    }
+
+    .icon {
+        font-size: 18px;
+        opacity: 0.8;
+        transition: opacity 0.2s ease;
+    }
+
+    &:hover .icon {
+        opacity: 1;
+    }
+
+    .linkName {
+        white-space: nowrap;
     }
 }
 
-.link_light {
-    color: $on-background-color;
+// Active 狀態
+.active {
+    background-color: var(--color-primary);
+    color: var(--color-on-primary);
+    border-color: var(--color-primary);
+    font-weight: 600;
 
-    // color: $on-primary-color;
-    // background-color: $primary-color;
+    .icon {
+        opacity: 1;
+    }
 
     &:hover {
-        // color: $on-primary-container-color;
-        // border-color: $on-primary-container-color;
-        box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.3); // 輕微陰影
-        background-image: linear-gradient(rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.08)); // 疊加 state layer
+        background-color: var(--color-primary-hover);
+        color: var(--color-on-primary);
+        transform: translateY(-2px);
     }
-}
-
-.link_dark {
-    color: $on-background-color-dark;
-
-    &:hover {
-        color: $on-primary-container-color-dark;
-        border-color: $primary-container-color-dark;
-        box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.3); // 輕微陰影
-        background-image: linear-gradient(rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.08)); // 疊加 state layer
-    }
-}
-
-.icon {
-    margin-right: 5px;
 }

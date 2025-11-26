@@ -22,8 +22,9 @@ export default function Layout({
   image,
   ogType,
 }: LayoutProps) {
-  const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+
+  const { theme, setTheme } = useTheme();
   const { isHomePage } = usePage();
   const router = useRouter();
 
@@ -140,7 +141,7 @@ export default function Layout({
 
       <div className={`progress_bar ${styles.progress_bar}`} />
       {<NavBar />}
-      <div className={!isHomePage ? styles.content : ""}>{children}</div>
+      <div className={styles.content}>{children}</div>
       {<Footer />}
     </div>
   );

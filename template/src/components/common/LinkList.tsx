@@ -1,54 +1,91 @@
-const LinkName = {
-  home: "/",
-  test: "test",
-  404: "404",
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
+import {
+  faHome,
+  faPalette,
+  faFileAlt,
+} from "@fortawesome/free-solid-svg-icons";
+
+/**
+ * 導航連結項目的類型定義
+ */
+export interface NavLinkItem {
+  href: string;
+  name: string;
+  className: string;
+  description?: string;
+  fontAwesomeIcon?: IconProp;
+  children?: NavLinkItem[];
+}
+
+/**
+ * 路由路徑常量
+ * 集中管理所有路由路徑，方便維護和修改
+ */
+export const ROUTES = {
+  HOME: "/",
+  THEME_DEMO: "/theme-demo",
+  NOT_FOUND: "/404",
+} as const;
+
+/**
+ * 導航連結詳細資料
+ * 使用 Record 確保類型安全
+ */
+const LinkListDetail: Record<string, Omit<NavLinkItem, "fontAwesomeIcon">> = {
+  home: {
+    href: ROUTES.HOME,
+    name: "首頁",
+    className: ROUTES.HOME,
+    description: "返回首頁",
+  },
+  themeDemo: {
+    href: ROUTES.THEME_DEMO,
+    name: "主題展示",
+    className: ROUTES.THEME_DEMO,
+    description: "查看所有主題顏色和組件範例",
+  },
+  notFound: {
+    href: ROUTES.NOT_FOUND,
+    name: "404",
+    className: ROUTES.NOT_FOUND,
+    description: "404 頁面",
+  },
 };
 
-const LinkListDetail = {
-  [LinkName.home]: {
-    href: "/",
-    title: "首頁",
-    className: "/",
-    description: "首頁",
-  },
-  [LinkName.test]: {
-    href: "/",
-    title: "測試頁面",
-    className: "/test",
-    description: "測試頁面",
-  },
-  [LinkName[404]]: {
-    href: `/${LinkName[404]}`,
-    title: "404",
-    description: "404",
-    className: `/${LinkName[404]}`,
-  },
-};
-
-const LinkList = [
+/**
+ * 主導航選單配置
+ * 支援單層和多層選單結構
+ */
+export const LinkList: NavLinkItem[] = [
   {
-    ...LinkListDetail[LinkName.home],
-    name: LinkListDetail[LinkName.home].title,
-    // fontAwesomeIcon: faHome,
+    ...LinkListDetail.home,
+    fontAwesomeIcon: faHome,
   },
+  {
+    ...LinkListDetail.themeDemo,
+    fontAwesomeIcon: faPalette,
+  },
+  // 範例：多層選單結構
   // {
-  //   name: "紀錄",
-  //   // fontAwesomeIcon: faSmile, // 父層可以放一個 icon
+  //   name: "資源",
+  //   href: "#",
+  //   className: "/resources",
+  //   fontAwesomeIcon: faFileAlt,
   //   children: [
   //     {
-  //       ...LinkListDetail[LinkName.test],
-  //       name: LinkListDetail[LinkName.test].title,
+  //       ...LinkListDetail.themeDemo,
+  //       fontAwesomeIcon: faPalette,
   //     },
   //     {
-  //       ...LinkListDetail[LinkName.test],
-  //       name: LinkListDetail[LinkName.test].title,
-  //     },
-  //     {
-  //       ...LinkListDetail[LinkName.test],
-  //       name: LinkListDetail[LinkName.test].title,
+  //       href: "/docs",
+  //       name: "文檔",
+  //       className: "/docs",
+  //       description: "查看文檔",
   //     },
   //   ],
   // },
 ];
 
-export { LinkName, LinkListDetail, LinkList };
+// 向後兼容的導出（如果其他地方有使用）
+export const LinkName = ROUTES;
+export { LinkListDetail };

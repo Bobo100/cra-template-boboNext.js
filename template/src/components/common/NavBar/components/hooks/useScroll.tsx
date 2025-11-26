@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import useWindowSize from "@/hooks/useWindowSize";
-import variables from "@/styles/variables.module.scss";
+// import variables from "@/styles/variables.module.scss";
 
 // export const mobileWidth = parseInt(variables["width2XL"].replace("px", ""));
-export const mobileWidth = 1024;
+export const mobileWidth = 1536;
 
 const useScroll = () => {
   const [prevScrollPos, setPrevScrollPos] = useState(0);

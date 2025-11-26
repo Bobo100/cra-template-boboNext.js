@@ -1,5 +1,4 @@
-@use "@/styles/_variables.scss" as *;
-@use "@/styles/_mixins.scss" as mixins;
+@use "@/styles/index" as *;
 
 .link_container {
     display: flex;
@@ -7,12 +6,12 @@
     padding: 0 20px;
     margin-bottom: 10px;
 
-    @include mixins.rwd-custom($width-sm) {
+    @include rwd-custom($width-sm) {
         padding: 0 10px;
         gap: 2rem;
     }
 
-    @include mixins.rwd-custom(375px) {
+    @include rwd-custom(375px) {
         padding: 0;
         gap: 0rem;
 

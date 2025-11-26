@@ -1,5 +1,82 @@
+// -------------------------------
+// Responsive Design Mixin
+// -------------------------------
 @mixin rwd-custom($width) {
     @media screen and (max-width: $width) {
         @content;
+    }
+}
+
+// -------------------------------
+// Theme-aware Color Mixins
+// 使用 SCSS 變數實作主題感知顏色
+// -------------------------------
+
+// 背景顏色 mixin
+@mixin theme-bg($light-color, $dark-color) {
+    background-color: $light-color;
+
+    .dark & {
+        background-color: $dark-color;
+    }
+}
+
+// 文字顏色 mixin
+@mixin theme-color($light-color, $dark-color) {
+    color: $light-color;
+
+    .dark & {
+        color: $dark-color;
+    }
+}
+
+// 邊框顏色 mixin
+@mixin theme-border($light-color, $dark-color, $width: 1px, $style: solid) {
+    border: $width $style $light-color;
+
+    .dark & {
+        border-color: $dark-color;
+    }
+}
+
+// 完整主題樣式 mixin（背景 + 文字）
+@mixin theme-surface {
+    @include theme-bg($surface-light, $surface-dark);
+    @include theme-color($on-surface-light, $on-surface-dark);
+}
+
+// 主要按鈕樣式 mixin
+@mixin theme-button-primary {
+    @include theme-bg($primary-light, $primary-dark);
+    @include theme-color($on-primary-light, $on-primary-dark);
+
+    &:hover {
+        @include theme-bg($primary-hover-light, $primary-hover-dark);
+    }
+
+    &:active {
+        @include theme-bg($primary-active-light, $primary-active-dark);
+    }
+}
+
+// 次要按鈕樣式 mixin
+@mixin theme-button-secondary {
+    @include theme-bg($secondary-light, $secondary-dark);
+    @include theme-color($on-secondary-light, $on-secondary-dark);
+
+    &:hover {
+        @include theme-bg($secondary-hover-light, $secondary-hover-dark);
+    }
+}
+
+// 卡片樣式 mixin
+@mixin theme-card {
+    @include theme-surface;
+    @include theme-border($border-light, $border-dark);
+    border-radius: 12px;
+    box-shadow: 0 1px 3px $shadow-light;
+
+    .dark & {
+        box-shadow: 0 1px 3px $shadow-dark;
     }
 }

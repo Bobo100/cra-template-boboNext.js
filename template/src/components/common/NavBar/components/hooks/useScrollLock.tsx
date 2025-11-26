@@ -1,5 +1,6 @@
 // https://blog.logrocket.com/create-advanced-scroll-lock-react-hook/
 import { useCallback, useLayoutEffect } from "react";
+
 const useScrollLock = (id: string) => {
   const lockScroll = useCallback(() => {
     const scrollBarCompensation = window.innerWidth - document.body.offsetWidth;
